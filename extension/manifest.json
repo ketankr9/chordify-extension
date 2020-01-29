@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "Chordify",
   "description": "Chordify",
-  "version": "0.1b",
+  "version": "0.2b",
   "applications": {
     "gecko": {
       "strict_min_version": "57.0"
