@@ -1,6 +1,5 @@
-function generateURL(url){
-  return "http://localhost:5000"
-  // return "https://chordify.net/song/data/youtube:u5fVUc_sOog?vocabulary=extended_inversions";
+function getWebhookURL(url){
+  return "http://localhost:5000";
 }
 
 function getID(url_string){
@@ -77,7 +76,8 @@ function handleResponse(data, tabId){
   sendMsg({
     message: summary,
     url: chordify_url,
-    chord: chords
+    chord: chords,
+    host: "youtube.com"
   }, tabId);
 }
 
@@ -87,7 +87,7 @@ function OnYoutubeLoad(details){
   const id = getID(details.url);
   const chordify_api = "https://chordify.net/song/data/youtube:" + id + "?vocabulary=extended_inversions";
 
-  const url = generateURL(details.url);
+  const url = getWebhookURL(details.url);
 
   var xhr = new XMLHttpRequest();
 
@@ -102,7 +102,8 @@ function OnYoutubeLoad(details){
           sendMsg({
             message: "Na",
             url: undefined,
-            chord: undefined
+            chord: undefined,
+            host : "youtube.com"
           }, details.tabId);
         else
           handleResponse(JSON.parse(xhr.response), details.tabId);
@@ -118,4 +119,50 @@ function OnYoutubeLoad(details){
 browser.webRequest.onBeforeRequest.addListener(
   OnYoutubeLoad,
   {urls: ["*://*.youtube.com/watch*"]}
+);
+
+// function showLove(tabId){
+//   sendMsg({
+//     message: "love",
+//     url: undefined,
+//     chord: undefined,
+//     host : "chordify.net"
+//   }, tabId);
+// }
+
+function updateIconStar(){
+  browser.browserAction.setIcon({path: {
+    19: "icons/star-filled-19.png",
+    38: "icons/star-filled-38.png"
+  }});
+}
+
+function updateIconDefault(){
+  browser.browserAction.setIcon({path: {
+    16: "icons/page-16.png",
+    32: "icons/page-32.png",
+    48: "icons/page-48.png"
+  }});
+}
+
+function onChordifyLoad(details){
+  console.log("chordify url hit");
+  console.log("URL: ", details.url);
+  const x = details.url.split("/");
+  const name = x[x.length-1];
+  browser.storage.local.get(null,function(data){
+    if(name in data){
+      // showLove(details.tabId);
+      console.log("FAV :3");
+      updateIconStar();
+    }else{
+      updateIconDefault();
+      console.log("N FAV");
+    }
+  });
+}
+
+browser.webRequest.onBeforeRequest.addListener(
+  onChordifyLoad,
+  {urls: ["*://*.chordify.net/chords/*"]}
 );

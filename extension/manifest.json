@@ -16,8 +16,17 @@
 
   "permissions": [
     "webRequest",
-     "*://*.youtube.com/*"
+     "*://*.youtube.com/*",
+     "*://*.chordify.net/chords/*",
+     "tabs",
+     "storage"
   ],
+
+  "browser_action": {
+      "default_icon": "icons/page-32.png",
+      "default_title": "Chordify",
+      "default_popup": "popup/page.html"
+  },
 
   "web_accessible_resources": [
     "chords/*.png"

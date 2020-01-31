@@ -37,8 +37,26 @@ function waitForElementToDisplay(selector, time, request) {
     }
 }
 
+// function waitForElementToDisplay2(){
+//   if(document.getElementsByClassName("icon-love").length > 0){
+//     document.getElementsByClassName("icon-love")[0].style.backgroundColor = "#00695c";
+//     console.log("setting color");
+//     // alert("fav");
+//     // document.getElementById("background").remove();
+//     return;
+//   }else{
+//     setTimeout(function () {
+//       waitForElementToDisplay2();
+//     }, 500);
+//   }
+// }
+
+
 function handleMessage(request, sender, sendResponse) {
-  	waitForElementToDisplay("menu-container", 500, request);
+  // if(request.host == "chordify.net")
+  //   waitForElementToDisplay2();
+  // else
+    waitForElementToDisplay("menu-container", 500, request);
 }
 
 browser.runtime.onMessage.addListener(handleMessage);
