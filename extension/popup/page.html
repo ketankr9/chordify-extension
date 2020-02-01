@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<style>
+  html,
+  body {
+    width: auto;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .button {
+    margin: 1% auto;
+    padding: 4px;
+    text-align: center;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+
+  .error {
+    background-color: red;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .song:hover {
+    background-color: red;
+  }
+
+  .song {
+    background-color: #E5F2F2;
+  }
+
+  .add {
+    background-color: #FBFBC9;
+  }
+
+  .add:hover {
+    background-color: #EAEA9D;
+  }
+</style>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="style.css"/> -->
+</head>
+
+<body>
+  <div id="add" class="button add">Add</div>
+  <div id="popup-content"></div>
+
+  <div id="error-content" class="hidden error button">
+    <p>Try chordify.net</p>
+  </div>
+  <div id="duplicate-content" class="hidden error button">
+    <p>Duplicate Element.</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

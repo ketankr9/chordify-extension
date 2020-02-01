@@ -1,5 +1,4 @@
 {
-
   "manifest_version": 2,
   "name": "Chordify",
   "description": "Chordify",
@@ -9,9 +8,10 @@
       "strict_min_version": "57.0"
     }
   },
-
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
 
   "content_scripts": [
@@ -23,13 +23,19 @@
 
   "permissions": [
     "webRequest",
-     "*://*.youtube.com/*"
+    "*://*.youtube.com/*",
+    "*://*.chordify.net/chords/*",
+    "tabs",
+    "storage"
   ],
-
+  "browser_action": {
+    "default_icon": "icons/page-32.png",
+    "default_title": "Chordify",
+    "default_popup": "popup/page.html"
+  },
   "web_accessible_resources": [
     "chords/*.png"
   ],
-
   "icons": {
     "16": "icons/page-16.png",
     "32": "icons/page-32.png",
