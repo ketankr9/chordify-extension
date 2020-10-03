@@ -18,11 +18,13 @@ function addNewSong() {
             dic[name] = url;
             updateStorage();
             addUrlToDom(name, url);
+            backup(url);
         } else {
             console.log("Duplicate url ", name, url);
             document.getElementById('duplicate-content').classList.remove("hidden");
         }
     });
+
 }
 
 function initialize() {
@@ -56,4 +58,24 @@ function addUrlToDom(key, url) {
 
 function updateStorage() {
     browser.storage.local.set(dic);
+}
+
+function backup(url) {
+    const agentUrl = "http://localhost:5000/save";
+
+    var xhr = new XMLHttpRequest();
+  
+    xhr.open("POST", agentUrl, true);
+  
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        console.log("DONE", xhr.status);
+        if (xhr.status == 200) {
+          console.log("Received Response", xhr.response);
+        } else
+          console.log("Is the server working?");
+      }
+    }
+  
+    xhr.send(url);
 }
