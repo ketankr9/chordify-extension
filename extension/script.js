@@ -56,7 +56,9 @@ function handleMessage(request, sender, sendResponse) {
   // if(request.host == "chordify.net")
   //   waitForElementToDisplay2();
   // else
-  waitForElementToDisplay("menu-container", 500, request);
+  console.log("chordify", request.url);
+
+  waitForElementToDisplay("owner-and-teaser", 500, request);
 }
 
 browser.runtime.onMessage.addListener(handleMessage);

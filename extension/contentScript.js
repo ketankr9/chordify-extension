@@ -1,46 +1,65 @@
-waitForElementToDisplay(500);
-function waitForElementToDisplay(time) {
-    if(window.document.getElementById("mm") != undefined) {
-        window.document.getElementById("mm").style.opacity = "0";
-        console.log("background removed");
-    	return;
-    }
-    else {
-        setTimeout(function() {
-            waitForElementToDisplay(time);
-        }, time);
-    }
+function watchAndExecute(time, func) {
+  if(func()){
+    return;
+  }
+
+  setTimeout(() => watchAndExecute(time, func), time);
 }
 
-waitForBottom(500);
-function waitForBottom(time) {
-    if(window.document.getElementsByClassName("dstubn").length > 0 && window.document.getElementsByClassName("dstubn")[0].childNodes.length > 0) {
-        window.document.getElementsByClassName("dstubn")[0].childNodes[0].click();
-        console.log("bottom ad closed");
-    	return;
-    }
-    else {
-        setTimeout(function() {
-            waitIconRight(time);
-        }, time);
-    }
-}
+// Delete top advertisement
+watchAndExecute(500, function(){
+  if(window.document.getElementById("mm") != undefined) {
+    window.document.getElementById("mm").remove();
+    console.log("top Ad and background removed");
 
-waitIconRight(2000);
-function waitIconRight(time) {
-    if(window.document.getElementById("play-button") != undefined) {
-        // await delay(10000);
-        var ele = window.document.getElementById("play-button");
-        console.log("right-icon");
-        ele.click();
-    	return;
+    if(window.document.getElementById("popup") != undefined){
+      window.document.getElementById("popup").remove();
     }
-    else {
-        setTimeout(function() {
-            waitIconRight(time);
-        }, time);
-    }
-}
+    return true;
+  }
 
-// document.getElementsByClassName("dstubn")[0].childNodes[0].click()
+  return false;
+});
+
+watchAndExecute(500, function(){
+  if(window.document.getElementsByClassName("dstubn").length > 0 && window.document.getElementsByClassName("dstubn")[0].childNodes.length > 0) {
+    window.document.getElementsByClassName("dstubn")[0].childNodes[0].click();
+    console.log("bottom ad closed");
+    return true;
+  }
+
+  return false;
+});
+
+watchAndExecute(2000, function(){
+  if(window.document.getElementById("play-button") != undefined) {
+    var ele = window.document.getElementById("play-button");
+    console.log("right-icon");
+    ele.click();
+    return true;
+  }
+
+  return false;
+});
+
+// Choose Ukulele and play
+watchAndExecute(2000, function(){
+  if(window.document.getElementsByClassName("i1q78294").length == 4) {
+    // Choose Ukulele
+    window.document.getElementsByClassName("i1q78294")[1].click();
+
+    // play
+    window.document.getElementById("play-button").click();
+
+    // close bottom Ad
+    if(window.document.getElementsByClassName("icon-close").length >= 1){
+      window.document.getElementsByClassName("icon-close")[1].click();
+    }
+
+    return true;
+  }
+
+  return false;
+});
+
 console.log("Content script executed.");

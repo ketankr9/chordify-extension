@@ -4,6 +4,9 @@ import flask
 
 import requests
 
+import logging
+logging.getLogger("werkzeug").disabled = True
+
 app = Flask(__name__)
 
 @app.route('/', methods = ['POST', 'GET'])
@@ -14,9 +17,19 @@ def mainFunc():
 		url = request.data
 
 	req = requests.get(url)
-	data = req.text
+	print(url)
+	# print(req.status_code)
+	text_data = req.text
 
-	resp = flask.make_response(data)
+	if req.status_code != 404:
+		json_data = req.json()
+		print(json_data["title"])
+		print(json_data["url"])
+	else:
+		print(req.status_code)
+		text_data = ""
+
+	resp = flask.make_response(text_data)
 	resp.headers["Access-Control-Allow-Origin"] = "*"
 
 	return resp
@@ -32,4 +45,4 @@ def mainFunc():
 # 	return resp
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True, port=5000)

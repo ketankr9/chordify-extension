@@ -8,22 +8,30 @@ function getID(url_string) {
 }
 
 function getImgName(name) {
-  var arr = name.split(":");
+  var arr = name.split("/")[0].split(":");
 
-  if (arr[0] == "A#")
-    arr[0] = "Bb";
-  else if (arr[0] == "D#")
-    arr[0] = "Eb";
-  else if (arr[0] == "Db")
-    arr[0] = "C#";
-  else if (arr[0] == "G#")
-    arr[0] = "Ab";
+  var chord = normalizeChordForImage(arr[0]);
 
-  left = arr[0];
-  if (arr[0][arr[0].length - 1] == "#")
-    left = arr[0].slice(0, arr[0].length - 1) + "s";
+  if (chord[chord.length - 1] == "#")
+    chord = chord.slice(0, chord.length - 1) + "s";
   // console.log(name, arr);
-  return left + "_" + arr[1] + ".png";
+
+  return chord + "_" + arr[1] + ".png";
+}
+
+function normalizeChordForImage(chord){
+  if (chord == "A#")
+    return "Bb";
+  if (chord == "D#")
+    return "Eb";
+  if (chord == "Db")
+    return "C#";
+  if (chord == "G#")
+    return "Ab";
+  if (chord == "Gb")
+    return "F#";
+
+  return chord;
 }
 
 function generateChordsURL(chords) {
@@ -73,6 +81,9 @@ function handleResponse(data, tabId) {
   const chordify_url = data["url"];
   const all_chords = getUniqueChords(data["chords"]);
   const chords = generateChordsURL(all_chords);
+
+  console.log(chords);
+
   sendMsg({
     message: summary,
     url: chordify_url,
@@ -82,7 +93,7 @@ function handleResponse(data, tabId) {
 }
 
 function OnYoutubeLoad(details) {
-  console.log("DomLoaded: ", details.url, details.tabId);
+  console.log("DomLoaded: ", details);
 
   const id = getID(details.url);
   const chordify_api = "https://chordify.net/song/data/youtube:" + id + "?vocabulary=extended_inversions";
@@ -95,9 +106,9 @@ function OnYoutubeLoad(details) {
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
-      console.log("DONE", xhr.status);
+      console.log("Received Response", xhr.response);
+
       if (xhr.status == 200) {
-        // console.log("Received Response", xhr.response);
         if (xhr.response == "")
           sendMsg({
             message: "Na",
@@ -116,10 +127,13 @@ function OnYoutubeLoad(details) {
   xhr.send(chordify_api);
 }
 
-browser.webRequest.onBeforeRequest.addListener(
-  OnYoutubeLoad,
-  { urls: ["*://*.youtube.com/watch*"] }
-);
+function handleYoutubeUrlChange(tabId, changeInfo, tabInfo) {
+  if (changeInfo.url) {
+    console.log("Tab: " + tabId + " URL changed to " + changeInfo.url);
+    OnYoutubeLoad({url: changeInfo.url, tabId: tabId});
+  }
+}
+browser.tabs.onUpdated.addListener(handleYoutubeUrlChange, {urls: ["*://*.youtube.com/*"]});
 
 // function showLove(tabId){
 //   sendMsg({
