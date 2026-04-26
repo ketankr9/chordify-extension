@@ -1,0 +1,4 @@
+.vscode/
+server.bin
+extra/
+.DS_Store

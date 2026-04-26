@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head><title>Create Green Icons</title></head>
+<body>
+<h1>Green Icon Generator</h1>
+<p>Open this in Chrome, then right-click > Inspect > Console to run the script</p>
+<canvas id="canvas"></canvas>
+<script>
+// Create green versions of the icons using canvas
+function createGreenIcon(size) {
+  const canvas = document.getElementById('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  
+  // Green background circle
+  ctx.fillStyle = '#4CAF50';
+  ctx.beginPath();
+  ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+  ctx.fill();
+  
+  // White music note
+  ctx.fillStyle = '#FFFFFF';
+  const noteX = size * 0.35;
+  const noteY = size * 0.3;
+  const noteWidth = size * 0.3;
+  const noteHeight = size * 0.5;
+  
+  // Note head
+  ctx.beginPath();
+  ctx.ellipse(noteX, noteY + noteHeight * 0.8, noteWidth/2, noteHeight/3, -0.3, 0, Math.PI * 2);
+  ctx.fill();
+  
+  // Note stem
+  ctx.fillRect(noteX + noteWidth/4, noteY, noteWidth/5, noteHeight * 0.7);
+  
+  // Download button
+  const link = document.createElement('a');
+  link.download = `green-icon-${size}.png`;
+  link.href = canvas.toDataURL();
+  link.click();
+  
+  console.log(`Green icon ${size}x${size} created!`);
+}
+
+// Generate all sizes
+[16, 32, 48].forEach(size => {
+  setTimeout(() => createGreenIcon(size), size * 100);
+});
+</script>
+</body>
+</html>

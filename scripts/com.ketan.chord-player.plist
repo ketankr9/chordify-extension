@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ketan.chord-player</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Library/Frameworks/Python.framework/Versions/3.10/bin/python3</string>
+        <string>-m</string>
+        <string>http.server</string>
+        <string>8082</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/ketan/code/chordify-extension/chord-player</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/com.ketan.chord-player.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/com.ketan.chord-player.err.log</string>
+</dict>
+</plist>

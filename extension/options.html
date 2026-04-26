@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Chordify Extension Options</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px;
+      background: #f8f8f8;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 24px;
+      color: #0f0f0f;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+    
+    .settings-section {
+      border-top: 1px solid #e0e0e0;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+    
+    .setting-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 0;
+    }
+    
+    .setting-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+    
+    .setting-content {
+      flex: 1;
+    }
+    
+    .setting-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0f0f0f;
+      margin: 0 0 4px 0;
+    }
+    
+    .setting-description {
+      font-size: 13px;
+      color: #666;
+      margin: 0;
+      line-height: 1.5;
+    }
+    
+    .saved-indicator {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .saved-indicator.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎸 Chordify Extension</h1>
+    <p class="subtitle">Customize your chord experience</p>
+    
+    <div class="settings-section">
+      <div class="setting-item">
+        <input type="checkbox" id="disable-injection-toggle">
+        <div class="setting-content">
+          <label class="setting-label" for="disable-injection-toggle">
+            Disable auto-injection on YouTube
+          </label>
+          <p class="setting-description">
+            When enabled, chords will not be automatically injected below YouTube videos. 
+            You can still view chords by clicking the extension icon in the toolbar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="saved-indicator" class="saved-indicator">✓ Settings saved</div>
+  
+  <script src="options.js"></script>
+</body>
+</html>

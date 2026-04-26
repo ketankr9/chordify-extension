@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "Chordify",
+  "description": "Chordify",
+  "version": "0.8.0",
+  "action": {
+    "default_icon": "icons/page-32.png",
+    "default_title": "Chordify",
+    "default_popup": "popup/page.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.chordify.net/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "tabs",
+    "storage",
+    "webNavigation",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "*://*.chordify.net/*",
+    "http://localhost:5050/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "chords/*.png"
+      ],
+      "matches": [
+        "*://*.chordify.net/*",
+        "*://*.youtube.com/*"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/page-16.png",
+    "32": "icons/page-32.png",
+    "48": "icons/page-48.png"
+  }
+}

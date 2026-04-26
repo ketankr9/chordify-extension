@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chord Player - Free Chordify</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <a href="/" class="logo-link">
+          <h1>🎸 Chord Player</h1>
+        </a>
+      </div>
+      <div class="header-right">
+        <select id="theme-select" class="theme-select">
+          <option value="theme-terminal">📟 Terminal</option>
+          <option value="theme-cyberpunk">🎸 Cyberpunk</option>
+          <option value="theme-nord">❄️ Nord Frost</option>
+          <option value="theme-modern">✨ Modern</option>
+          <option value="theme-dark">🌙 Dark Gold</option>
+        </select>
+        <input type="text" id="youtube-url" placeholder="Paste YouTube URL..." class="url-input"
+          value="https://www.youtube.com/watch?v=XIcmGjmW35I" />
+        <button id="load-btn" class="load-btn">Load</button>
+        <a id="chordify-link" class="chordify-link" target="_blank" rel="noopener noreferrer"
+          title="View on Chordify.net">C</a>
+      </div>
+    </header>
+
+    <!-- Landing Section -->
+    <div id="landing-section" class="landing-section">
+      <div class="landing-content">
+        <div class="hero-icon">🎸</div>
+        <h2 class="landing-title">Ready to Jam?</h2>
+        <p class="landing-subtitle">Paste a YouTube URL above and we'll fetch the chords for you in seconds.</p>
+      </div>
+      <div class="terminal-welcome">
+        <pre class="ascii-art">
+  ____ _   _  ___  ____  ____  
+ / ___| | | |/ _ \|  _ \|  _ \ 
+| |   | |_| | | | | |_) | | | |
+| |___|  _  | |_| |  _ <| |_| |
+ \____|_| |_|\___/|_| \_\____/ 
+      P L A Y E R   v 1 . 0
+        </pre>
+        <p class="terminal-status">[ STATUS: OK ]</p>
+        <p class="terminal-msg">> WAITING FOR INPUT...</p>
+      </div>
+      <div class="example-links">
+        <span>Try these:</span>
+        <button class="example-btn" data-url="https://www.youtube.com/watch?v=19cSv7zjdfU">Cant Take My Eyes Off Of
+          You (ukulele cover) | Reneé Dominique</button>
+        <button class="example-btn" data-url="https://www.youtube.com/watch?v=B3Z4XGAxJB0">Djo - End of
+          Beginning</button>
+        <button class="example-btn" data-url="https://www.youtube.com/watch?v=kJQP7kiw5Fk">Despacito</button>
+      </div>
+
+      <!-- Bookmarked Songs -->
+      <div id="bookmarks-container" class="example-links hidden">
+        <span>Saved:</span>
+        <div id="bookmarks-list" class="bookmarks-list">
+          <!-- Bookmarks will be inserted here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <p>Fetching chords from Chordify...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="error" class="error hidden">
+      <p id="error-message">Failed to load chords</p>
+    </div>
+
+    <!-- Player Section -->
+    <div id="player-section" class="player-section hidden">
+      <!-- Main Content: Chords + Video -->
+      <div class="main-content">
+        <!-- Left: Chord Display (3/4) -->
+        <div class="chords-panel">
+          <!-- Chord Display Container -->
+          <div class="chord-display-container">
+            <!-- Scrolling Chord Progression with Images -->
+            <div class="chord-progression-container">
+              <div class="song-header">
+                <h2 id="song-title">Song Title</h2>
+                <button id="bookmark-btn" class="bookmark-btn" title="Save to bookmarks">🔖 Save</button>
+              </div>
+              <div class="chord-progression-label">Chord Progression</div>
+              <div id="chord-scroll" class="chord-scroll">
+                <div class="playhead"></div>
+                <div id="chord-timeline" class="chord-timeline"></div>
+              </div>
+            </div>
+
+            <!-- Current Chord (Large Display) -->
+            <div class="current-chord-section">
+              <div class="current-chord-label">Current Chord</div>
+              <div class="current-chord-display">
+                <div class="chord-scroll-container">
+                  <div id="chord-diagrams-scroll" class="chord-diagrams-scroll">
+                    <div id="chord-diagrams-list" class="chord-diagrams-list">
+                      <!-- Chord diagrams will be inserted here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Video Panel (1/4) -->
+        <div class="video-panel">
+          <div class="video-container">
+            <div id="youtube-player"></div>
+          </div>
+          <!-- Song Info below video -->
+          <div class="song-info">
+            <!-- All Unique Chords -->
+            <div class="all-chords-section">
+              <div class="all-chords-label">All Chords in Song</div>
+              <div id="chord-grid" class="chord-grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

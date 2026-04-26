@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ketan.chordify-server</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Library/Frameworks/Python.framework/Versions/3.10/bin/python3</string>
+        <string>server.py</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/ketan/code/chordify-extension</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/com.ketan.chordify-server.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/com.ketan.chordify-server.err.log</string>
+</dict>
+</plist>
