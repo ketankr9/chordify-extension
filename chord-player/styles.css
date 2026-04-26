@@ -311,8 +311,9 @@ body {
   transform: translateY(-1px);
 }
 
-/* Chordify Link as a "C" box at the end */
-.chordify-link {
+/* Header Icon Buttons (C and T) */
+.chordify-link,
+.tuner-link {
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -324,15 +325,18 @@ body {
   font-size: 16px;
   font-weight: 800;
   border-radius: 8px;
-  /* Rounded box */
   cursor: pointer;
   transition: all 0.2s;
   flex-shrink: 0;
-  margin-left: auto;
   border: 1px solid var(--input-border);
 }
 
-.chordify-link:hover {
+.tuner-link {
+  margin-left: auto;
+}
+
+.chordify-link:hover,
+.tuner-link:hover {
   filter: brightness(0.9);
   transform: translateY(-1px);
   text-decoration: none;
